@@ -72,7 +72,7 @@ TEMPLATES = [
 ]
 
 INTERNAL_IPS = [
-    "127.0.0.1:8000",
+    "127.0.0.1",
 ]
 
 WSGI_APPLICATION = 'projekt.wsgi.application'
@@ -134,6 +134,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-urlpatterns = [
-    path("__debug__/", include("debug_toolbar.urls")),
-]
+
