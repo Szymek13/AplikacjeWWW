@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+from django.contrib import admin
 
 # Create your models here.
 
@@ -10,6 +12,11 @@ SHIRT_SIZES = (
         ('M', 'Medium'),
         ('L', 'Large'),
     )
+
+PLEC = (
+    ('M', 'Mężczyzna'),
+    ('K', 'Kobieta')
+)
 
 
 class Team(models.Model):
@@ -29,3 +36,29 @@ class Person(models.Model):
 
     def __str__(self):
         return self.name
+
+class Stanowisko(models.Model):
+    nazwa = models.CharField(max_length=100)
+    opis = models.CharField(max_length=300)
+    def __str__(self):
+        return self.nazwa
+
+class Osoba(models.Model):
+    class Plec(models.IntegerChoices):
+        MEZCZYZNA = 1
+        KOBIETA = 2
+
+    imie = models.CharField(max_length=60)
+    nazwisko = models.CharField(max_length=100)
+    plec = models.IntegerField(choices=Plec.choices) #default=Plec.choices[0]
+    stanowisko = models.ForeignKey(Stanowisko, null=True, blank=True, on_delete=models.SET_NULL)
+    data_dodania = models.DateField(default=timezone.now())
+
+    class Meta:
+        ordering = ["nazwisko"]
+    def __str__(self):
+        return f'{self.imie} {self.nazwisko}'
+
+
+
+

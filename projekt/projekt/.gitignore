@@ -1,0 +1,16 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpsRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+/.gitignore
