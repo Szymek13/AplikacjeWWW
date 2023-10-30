@@ -28,6 +28,6 @@ Dodaj nową instancję obiektu klasy Osoba i zapisz w bazie:
 
 <span style="color:gray">new_stanowisko = Stanowisko.objects.get(id=2)</span>
 
-<span style="color:gray">new_osoba = Osoba(plec=1, imie="Dawid", nazwisko="Kowal", stanowisko=new_stanowisko)</span>
+<span style="color:gray">new_osoba = Osoba(plec=1, imie="Dawid", nazwisko="Kowalski", stanowisko=new_stanowisko)</span>
 
 <span style="color:gray">new_osoba.save()</span>
