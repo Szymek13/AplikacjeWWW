@@ -1,9 +1,11 @@
-from .models import Osoba
-from .serializers import OsobaSerializer
+from mirex.models import Osoba
+from mirex.models import Stanowisko
+from mirex.serializers import OsobaSerializer
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
+import io
 
-osoba = Osoba(imie="Magda", nazwisko="Kowal", plec="Kobieta", stanowisko="Tynkarz", data_dodania="2023-11-04")
+osoba = Osoba(imie="duck33", nazwisko="Smith", plec=1, stanowisko=Stanowisko.objects.get(nazwa="Tynkarz"), data_dodania="2023-11-06")
 osoba.save()
 
 serializer = OsobaSerializer(osoba)
@@ -12,7 +14,6 @@ serializer.data
 content = JSONRenderer().render(serializer.data)
 content
 
-import io
 stream = io.BytesIO(content)
 data = JSONParser().parse(stream)
 

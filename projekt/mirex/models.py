@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib import admin
+from rest_framework import serializers
 
 # Create your models here.
 
