@@ -23,22 +23,23 @@ class OsobaSerializer(serializers.ModelSerializer):
     plec = serializers.IntegerField(required=True)
     stanowisko = serializers.PrimaryKeyRelatedField(queryset=Stanowisko.objects.all())
     data_dodania = serializers.DateField(required=True)
+    wlasciciel = serializers.ReadOnlyField(source="wlasciciel.username")
 
     def create(self, validated_data):
         return Osoba.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.name = validated_data.get('imie', instance.name)
+        instance.imie = validated_data.get('imie', instance.imie)
         instance.nazwisko = validated_data.get('nazwisko', instance.nazwisko)
         instance.plec = validated_data.get('plec', instance.plec)
         instance.stanowisko = validated_data.get('stanowisko', instance.stanowisko)
+        instance.wlasciciel = validated_data.get('wlasciciel', instance.wlasciciel)
         instance.save()
         return instance
 
     class Meta:
         model = Osoba
-        read_only_fields = ['id']
-        fields = ['id', 'data_dodania', 'nazwa', 'plec', 'stanowisko']
+        fields = '__all__'
 
 class StanowiskoSerializer(serializers.ModelSerializer):
     nazwa = serializers.CharField(required=True)

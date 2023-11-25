@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib import admin
 from rest_framework import serializers
+from rest_framework.authtoken.models import Token
 
 # Create your models here.
 
@@ -54,12 +55,12 @@ class Osoba(models.Model):
     plec = models.IntegerField(choices=Plec.choices) #default=Plec.choices[0]
     stanowisko = models.ForeignKey(Stanowisko, null=True, blank=True, on_delete=models.SET_NULL)
     data_dodania = models.DateField(default=timezone.now())
+    wlasciciel = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name="Mirex")
 
     class Meta:
         ordering = ["nazwisko"]
+        permissions = [
+            ("can_view_other_persons", "Pozwala na wyświetlanie obiektów, których zalogowany użytkownik nie jest właścicielem")
+        ]
     def __str__(self):
         return f'{self.imie} {self.nazwisko}'
-
-
-
-
